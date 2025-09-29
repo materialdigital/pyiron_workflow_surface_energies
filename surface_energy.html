@@ -1,0 +1,620 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Example for LAMMPS engine &#8212; pyiron_workflow_surface_energies</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'surface_energy';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="pyiron example notebook" href="example.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo_dark.png" class="logo__image only-light" alt="pyiron_workflow_surface_energies - Home"/>
+    <script>document.write(`<img src="_static/logo_dark.png" class="logo__image only-dark" alt="pyiron_workflow_surface_energies - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="README.html">
+                    pyiron workflow template
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="example.html">pyiron example notebook</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Example for LAMMPS engine</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/materialdigital/pyiron_workflow_surface_energies/master?urlpath=lab/tree/surface_energy.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/surface_energy.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Example for LAMMPS engine</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># ASE imports</span>
+<span class="kn">from</span> <span class="nn">ase.build</span> <span class="kn">import</span> <span class="n">bulk</span><span class="p">,</span> <span class="n">stack</span>
+<span class="kn">from</span> <span class="nn">ase.lattice.cubic</span> <span class="kn">import</span> <span class="n">BodyCenteredCubic</span> <span class="k">as</span> <span class="n">bcc</span>
+
+<span class="c1"># Pyiron workflow imports</span>
+<span class="kn">import</span> <span class="nn">pyiron_workflow</span> <span class="k">as</span> <span class="nn">pwf</span>
+<span class="kn">from</span> <span class="nn">pyiron_workflow</span> <span class="kn">import</span> <span class="n">Workflow</span>
+<span class="kn">from</span> <span class="nn">pyiron_workflow_atomistics.dataclass_storage</span> <span class="kn">import</span> <span class="n">CalcInputMinimize</span>
+<span class="kn">from</span> <span class="nn">pyiron_workflow_atomistics.bulk</span> <span class="kn">import</span> <span class="n">optimise_cubic_lattice_parameter</span>
+<span class="kn">from</span> <span class="nn">pyiron_workflow_atomistics.bulk_defect.vacancy</span> <span class="kn">import</span> <span class="n">get_vacancy_formation_energy</span>
+<span class="kn">from</span> <span class="nn">pyiron_workflow_atomistics.calculator</span> <span class="kn">import</span> <span class="n">calculate_structure_node</span>
+<span class="kn">from</span> <span class="nn">pyiron_workflow_atomistics.surface.builder</span> <span class="kn">import</span> <span class="n">create_surface</span>
+<span class="kn">from</span> <span class="nn">pyiron_workflow_lammps.engine</span> <span class="kn">import</span> <span class="n">LammpsEngine</span>
+
+<span class="c1"># Pymatgen imports</span>
+<span class="kn">from</span> <span class="nn">pymatgen.core</span> <span class="kn">import</span> <span class="n">Structure</span>
+<span class="kn">from</span> <span class="nn">pymatgen.io.ase</span> <span class="kn">import</span> <span class="n">AseAtomsAdaptor</span>
+
+<span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The autoreload extension is already loaded. To reload it, use:
+  %reload_ext autoreload
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="example-for-lammps-engine">
+<h1>Example for LAMMPS engine<a class="headerlink" href="#example-for-lammps-engine" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">inp</span> <span class="o">=</span> <span class="n">CalcInputMinimize</span><span class="p">()</span>
+<span class="n">inp</span><span class="o">.</span><span class="n">relax_cell</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">Engine</span> <span class="o">=</span> <span class="n">LammpsEngine</span><span class="p">(</span><span class="n">EngineInput</span> <span class="o">=</span> <span class="n">inp</span><span class="p">)</span>
+
+<span class="n">Engine</span><span class="o">.</span><span class="n">working_directory</span> <span class="o">=</span> <span class="s2">&quot;surface_energy&quot;</span>
+<span class="n">Engine</span><span class="o">.</span><span class="n">lammps_log_filepath</span> <span class="o">=</span> <span class="s2">&quot;minimize.log&quot;</span>
+<span class="c1"># Adjust this line to match your LAMMPS installation</span>
+<span class="c1"># If you are using conda-lammps or a LAMMPS binary on your system, you can use directly:</span>
+<span class="n">Engine</span><span class="o">.</span><span class="n">command</span> <span class="o">=</span> <span class="s2">&quot;lmp -in in.lmp -log minimize.log&quot;</span>
+<span class="n">Engine</span><span class="o">.</span><span class="n">input_script_pair_style</span> <span class="o">=</span> <span class="s2">&quot;eam/fs&quot;</span>
+<span class="n">Engine</span><span class="o">.</span><span class="n">path_to_model</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;/Al-Fe.eam.fs&quot;</span>
+
+<span class="kn">from</span> <span class="nn">pyiron_workflow_atomistics.surface.surface_study</span> <span class="kn">import</span> <span class="n">calculate_surface_energy</span>
+
+<span class="n">wf</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="s2">&quot;surface_energy&quot;</span><span class="p">,</span> <span class="n">delete_existing_savefiles</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># /root/github_dev/pyiron_workflow_atomistics/pyiron_workflow_atomistics</span>
+<span class="n">structure</span> <span class="o">=</span> <span class="n">bulk</span><span class="p">(</span><span class="s2">&quot;Fe&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">2.85</span><span class="p">,</span> <span class="n">cubic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">wf</span><span class="o">.</span><span class="n">opt_cubic_cell</span> <span class="o">=</span> <span class="n">optimise_cubic_lattice_parameter</span><span class="p">(</span>
+    <span class="n">structure</span><span class="o">=</span><span class="n">structure</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Fe&quot;</span><span class="p">,</span>
+    <span class="n">crystalstructure</span><span class="o">=</span><span class="s2">&quot;bcc&quot;</span><span class="p">,</span>
+    <span class="n">calculation_engine</span><span class="o">=</span><span class="n">Engine</span><span class="p">,</span>
+    <span class="n">parent_working_directory</span><span class="o">=</span><span class="s2">&quot;opt_cubic_cell&quot;</span><span class="p">,</span>
+    <span class="n">rattle</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">strain_range</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">),</span>
+    <span class="n">num_points</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">eos_type</span><span class="o">=</span><span class="s2">&quot;birchmurnaghan&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="c1"># Any eos_type supported by ase.eos.EquationOfState can be used,</span>
+<span class="c1"># e.g. sjeos, taylor, murnaghan, birch, birchmurnaghan, pouriertarantola, vinet, antonschmidt, p3</span>
+<span class="n">wf</span><span class="o">.</span><span class="n">surface_energy</span> <span class="o">=</span> <span class="n">calculate_surface_energy</span><span class="p">(</span><span class="n">symbol</span> <span class="o">=</span> <span class="s2">&quot;Fe&quot;</span><span class="p">,</span>
+                                            <span class="n">calculation_engine</span> <span class="o">=</span> <span class="n">Engine</span><span class="p">,</span>
+                                            <span class="n">miller_indices</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                                            <span class="n">min_length</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+                                            <span class="n">vacuum</span> <span class="o">=</span> <span class="mf">10.0</span><span class="p">,</span>
+                                            <span class="n">crystalstructure</span> <span class="o">=</span> <span class="s2">&quot;bcc&quot;</span><span class="p">,</span>
+                                            <span class="n">mu_bulk</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                                            <span class="n">a</span> <span class="o">=</span> <span class="n">wf</span><span class="o">.</span><span class="n">opt_cubic_cell</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">a0</span><span class="p">,</span>
+                                            <span class="n">cubic</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">wf</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-09-26 01:20:24,567 - pyiron_log - WARNING - Directory &#39;test_opt_cubic_cell/strain_000&#39; already exists. Existing files may be overwritten.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>current mode  minimize
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-09-26 01:20:26,196 - pyiron_log - WARNING - Directory &#39;test_opt_cubic_cell/strain_001&#39; already exists. Existing files may be overwritten.
+2025-09-26 01:20:27,790 - pyiron_log - WARNING - Directory &#39;test_opt_cubic_cell/strain_002&#39; already exists. Existing files may be overwritten.
+2025-09-26 01:20:29,398 - pyiron_log - WARNING - Directory &#39;test_opt_cubic_cell/strain_003&#39; already exists. Existing files may be overwritten.
+2025-09-26 01:20:31,011 - pyiron_log - WARNING - Directory &#39;test_opt_cubic_cell/strain_004&#39; already exists. Existing files may be overwritten.
+2025-09-26 01:20:32,631 - pyiron_log - WARNING - Directory &#39;test_opt_cubic_cell/strain_005&#39; already exists. Existing files may be overwritten.
+2025-09-26 01:20:34,235 - pyiron_log - WARNING - Directory &#39;test_opt_cubic_cell/strain_006&#39; already exists. Existing files may be overwritten.
+2025-09-26 01:20:35,844 - pyiron_log - WARNING - Directory &#39;test_opt_cubic_cell/strain_007&#39; already exists. Existing files may be overwritten.
+2025-09-26 01:20:37,631 - pyiron_log - WARNING - Directory &#39;test_opt_cubic_cell/strain_008&#39; already exists. Existing files may be overwritten.
+2025-09-26 01:20:39,360 - pyiron_log - WARNING - Directory &#39;test_opt_cubic_cell/strain_009&#39; already exists. Existing files may be overwritten.
+2025-09-26 01:20:41,166 - pyiron_log - WARNING - Directory &#39;test_opt_cubic_cell&#39; already exists. Existing files may be overwritten.
+2025-09-26 01:20:42,979 - pyiron_log - WARNING - Directory &#39;test_opt_cubic_cell&#39; already exists. Existing files may be overwritten.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;opt_cubic_cell__equil_struct&#39;: Atoms(symbols=&#39;Fe2&#39;, pbc=True, cell=[2.8553600861257875, 2.8553600861257875, 2.8553600861257875], initial_magmoms=...),
+ &#39;opt_cubic_cell__B&#39;: np.float64(177.0390163507032),
+ &#39;opt_cubic_cell__equil_energy_per_atom&#39;: np.float64(-4.012966860824359),
+ &#39;opt_cubic_cell__equil_volume_per_atom&#39;: np.float64(11.639991349321107),
+ &#39;opt_cubic_cell__volumes&#39;: [np.float64(21.787771257000003),
+  np.float64(22.08554991529631),
+  np.float64(22.386029495370348),
+  np.float64(22.689222191000006),
+  np.float64(22.99514019596296),
+  np.float64(23.303795704037036),
+  np.float64(23.615200909),
+  np.float64(23.92936800462963),
+  np.float64(24.24630918470369),
+  np.float64(24.56603664300001)],
+ &#39;opt_cubic_cell__structures&#39;: [Atoms(symbols=&#39;Fe2&#39;, pbc=True, cell=[[2.7929999999999997, 1.7102192550092785e-16, 1.7102192550092785e-16], [0.0, 2.7929999999999997, 1.7102192550092785e-16], [0.0, 0.0, 2.7929999999999997]]),
+  Atoms(symbols=&#39;Fe2&#39;, pbc=True, cell=[[2.805666666666667, 1.717975351403879e-16, 1.717975351403879e-16], [0.0, 2.805666666666667, 1.717975351403879e-16], [0.0, 0.0, 2.805666666666667]]),
+  Atoms(symbols=&#39;Fe2&#39;, pbc=True, cell=[[2.8183333333333325, 1.7257314477984784e-16, 1.7257314477984784e-16], [0.0, 2.8183333333333325, 1.7257314477984784e-16], [0.0, 0.0, 2.8183333333333325]]),
+  Atoms(symbols=&#39;Fe2&#39;, pbc=True, cell=[[2.831, 1.7334875441930788e-16, 1.7334875441930788e-16], [0.0, 2.831, 1.7334875441930788e-16], [0.0, 0.0, 2.831]]),
+  Atoms(symbols=&#39;Fe2&#39;, pbc=True, cell=[[2.8436666666666666, 1.7412436405876786e-16, 1.7412436405876786e-16], [0.0, 2.8436666666666666, 1.7412436405876786e-16], [0.0, 0.0, 2.8436666666666666]]),
+  Atoms(symbols=&#39;Fe2&#39;, pbc=True, cell=[[2.856333333333333, 1.7489997369822782e-16, 1.7489997369822782e-16], [0.0, 2.856333333333333, 1.7489997369822777e-16], [0.0, 0.0, 2.856333333333333]]),
+  Atoms(symbols=&#39;Fe2&#39;, pbc=True, cell=[[2.869, 1.7567558333768783e-16, 1.7567558333768783e-16], [0.0, 2.869, 1.7567558333768788e-16], [0.0, 0.0, 2.869]]),
+  Atoms(symbols=&#39;Fe2&#39;, pbc=True, cell=[[2.881666666666667, 1.7645119297714781e-16, 1.7645119297714781e-16], [0.0, 2.881666666666667, 1.7645119297714781e-16], [0.0, 0.0, 2.881666666666667]]),
+  Atoms(symbols=&#39;Fe2&#39;, pbc=True, cell=[[2.894333333333333, 1.7722680261660777e-16, 1.7722680261660777e-16], [0.0, 2.894333333333333, 1.7722680261660777e-16], [0.0, 0.0, 2.894333333333333]]),
+  Atoms(symbols=&#39;Fe2&#39;, pbc=True, cell=[[2.907, 1.7800241225606778e-16, 1.7800241225606778e-16], [0.0, 2.907, 1.7800241225606778e-16], [0.0, 0.0, 2.907]])],
+ &#39;opt_cubic_cell__energies&#39;: [np.float64(-7.96855857293824),
+  np.float64(-7.98971772945127),
+  np.float64(-8.00597688742178),
+  np.float64(-8.01739070205234),
+  np.float64(-8.02401477327668),
+  np.float64(-8.0259497613144),
+  np.float64(-8.0233186722281),
+  np.float64(-8.01624241057633),
+  np.float64(-8.00484538326023),
+  np.float64(-7.98933512183745)],
+ &#39;surface_energy__unrelaxed_surface&#39;: Atoms(symbols=&#39;Fe38&#39;, pbc=True, cell=[[4.038088959257897, 0.0, 0.0], [2.019044479628949, 3.4970876214588036, 0.0], [0.0, 0.0, 50.498043915623654]], initial_magmoms=..., tags=...),
+ &#39;surface_energy__relaxed_surface&#39;: Atoms(symbols=&#39;Fe38&#39;, pbc=True, cell=[[4.0380889592579, 1.62928594985735e-16, 2.4726163593137267e-16], [6.05713343888685, 3.4970876214587996, 4.94523271862745e-16], [0.0, 0.0, 50.49804391562365]]),
+ &#39;surface_energy__relaxed_surface_calc_output&#39;: &lt;pyiron_workflow_atomistics.dataclass_storage.EngineOutput at 0x79900cd0d5b0&gt;,
+ &#39;surface_energy__mu_bulk&#39;: np.float64(-3.967924581129081),
+ &#39;surface_energy__surface_energy&#39;: np.float64(0.9932707739572464)}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;EAM: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">wf</span><span class="o">.</span><span class="n">opt_cubic_cell</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">a0</span><span class="o">.</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2"> Å&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Surface energy: </span><span class="si">{</span><span class="n">wf</span><span class="o">.</span><span class="n">surface_energy</span><span class="o">.</span><span class="n">surface_energy</span><span class="o">.</span><span class="n">value</span><span class="o">/</span><span class="mf">16.021766208</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> eV/Å² or </span><span class="si">{</span><span class="n">wf</span><span class="o">.</span><span class="n">surface_energy</span><span class="o">.</span><span class="n">surface_energy</span><span class="o">.</span><span class="n">value</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> J/m²&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;n_atoms: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">wf</span><span class="o">.</span><span class="n">surface_energy</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">relaxed_surface</span><span class="o">.</span><span class="n">value</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;The 111 surface energy is not correct for this potential, it is too low, dft predicts 2.73 J/m², see http://crystalium.materialsvirtuallab.org/&quot;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&lt;div style=&quot;color:orange; font-weight:bold;&quot;&gt;⚠️ The 111 surface energy is not correct for this potential, it is too low, DFT predicts 2.73 J/m², see &lt;a href=&quot;http://crystalium.materialsvirtuallab.org/&quot; target=&quot;_blank&quot;&gt;crystalium.materialsvirtuallab.org&lt;/a&gt;&lt;/div&gt;&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EAM: 2.8553
+Surface energy: 0.062 eV/Å² or 0.99 J/m²
+n_atoms: 38
+</pre></div>
+</div>
+<div class="output text_html"><div style="color:orange; font-weight:bold;">⚠️ The 111 surface energy is not correct for this potential, it is too low, DFT predicts 2.73 J/m², see <a href="http://crystalium.materialsvirtuallab.org/" target="_blank">crystalium.materialsvirtuallab.org</a></div></div></div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="example.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">pyiron example notebook</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By pyiron
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
