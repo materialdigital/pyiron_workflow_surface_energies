@@ -5,8 +5,11 @@ python .github/ci_support/pyironconfig.py
 # import dataset
 bash .github/ci_support/import_dataset.sh
 
-# conda install papermill
-conda install -c conda-forge papermill
+# install papermill (already in environment.yml)
+# conda install -c conda-forge papermill
+
+# register jupyter kernel
+python -m ipykernel install --user --name python3 --display-name "Python 3"
 
 # execute notebooks
 current_dir=$(pwd)
