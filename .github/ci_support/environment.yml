@@ -1,8 +1,21 @@
 channels:
   - conda-forge
 dependencies:
+  - python>=3.11,<3.13
+  - pip
+  - numpy =1.26.4
+  - ase =3.26.0
+  - pymatgen =2025.6.14
+  - pyiron_workflow =0.15.2
+  - pyiron_lammps =0.4.6
+  - pandas =2.3.1
+  - lammps =2024.08.29=*_mpi*
+  - pysqa =0.3.0
   - jupyter-book
   - ipykernel
   - jupyter
   - papermill
-  
+  - pip:
+      - pyiron-workflow-atomistics==0.0.2
+      - pyiron-workflow-lammps==0.0.2
+      - pyiron-snippets==0.2.0
