@@ -374,13 +374,9 @@ document.write(`
 <span class="kn">from</span><span class="w"> </span><span class="nn">ase.lattice.cubic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BodyCenteredCubic</span> <span class="k">as</span> <span class="n">bcc</span>
 
 <span class="c1"># Pyiron workflow imports</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pyiron_workflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pwf</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">Workflow</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_workflow_atomistics.dataclass_storage</span><span class="w"> </span><span class="kn">import</span> <span class="n">CalcInputMinimize</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_workflow_atomistics.bulk</span><span class="w"> </span><span class="kn">import</span> <span class="n">optimise_cubic_lattice_parameter</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_workflow_atomistics.bulk_defect.vacancy</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_vacancy_formation_energy</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_workflow_atomistics.calculator</span><span class="w"> </span><span class="kn">import</span> <span class="n">calculate_structure_node</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_workflow_atomistics.surface.builder</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_surface</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_workflow_lammps.engine</span><span class="w"> </span><span class="kn">import</span> <span class="n">LammpsEngine</span>
 
 <span class="c1"># Pymatgen imports</span>
