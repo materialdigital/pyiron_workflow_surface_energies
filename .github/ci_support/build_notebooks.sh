@@ -3,13 +3,9 @@ set -e  # Exit on any error
 
 echo "Starting notebook build process..."
 
-# pyiron config 
-echo "Setting up pyiron configuration..."
-python .github/ci_support/pyironconfig.py
-
-# import dataset
-echo "Importing datasets..."
-bash .github/ci_support/import_dataset.sh
+# install conda lammps
+echo "Installing LAMMPS via conda..."
+conda install -c conda-forge lammps -y
 
 # register jupyter kernel
 echo "Registering Jupyter kernel..."

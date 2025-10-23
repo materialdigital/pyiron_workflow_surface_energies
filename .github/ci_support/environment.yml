@@ -15,6 +15,7 @@ dependencies:
   - ipykernel
   - jupyter
   - papermill
+  - lammps =2024.08.29=*_mpi*
   - pip:
       - pyiron-workflow-atomistics==0.0.2
       - pyiron-workflow-lammps==0.0.2

@@ -39,6 +39,9 @@ dependencies = [
     "pyiron-workflow-lammps==0.0.2",
     "pyiron-snippets==0.2.0",
     
+    # Jupyter and notebook support
+    "ipykernel",
+    
     # Molecular dynamics simulation
     "lammps",
     
